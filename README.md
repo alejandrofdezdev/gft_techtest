@@ -1,6 +1,6 @@
 # Prueba Técnica Spring Boot
 
-### Estructura del Proyecto:
+## Estructura del Proyecto:
 
 El proyecto está estructurado en paquetes de acuerdo a la arquitectura hexagonal, con la siguiente estructura:
 
@@ -28,11 +28,12 @@ Para desarrollar el endpoint pedido se ha realizado usando TDD de la siguiente f
 2. **Iteración de test unitarios:**
     - Luego, para implementar el endpoint, se han creado test unitarios desde el repositorio hasta el controlador,
    primero haciendo los test, luego implementando el código y finalmente refactorizando.
-    - [Test de Repositorio](/src/test/java/gft/techtest/infrastructure/outbound/database/PriceRepositoryTest.java)
-    - [Test de Servicio](/src/test/java/gft/techtest/infrastructure/outbound/database/PriceServiceImplTest.java)
-    - [Test de Controlador](/src/test/java/gft/techtest/infrastructure/inbound/rest/PriceControllerTest.java)
+   - [Test de Servicio](/src/test/java/gft/techtest/unit/infrastructure/outbound/database/PriceServiceImplTest.java)
+   - [Test de Controlador](/src/test/java/gft/techtest/unit/infrastructure/inbound/rest/PriceControllerTest.java)
+   - [Test de Casos de Uso](/src/test/java/gft/techtest/unit/application/PriceUseCasesTest.java)
+   - [Test de Exception Handler](/src/test/java/gft/techtest/unit/infrastructure/inbound/rest/MyExceptionHandlerTest.java)
 3. **Analisis de calidad:**
-    - Tras tener todo implementado se ha utilizado Sonnar para verificar la calidad del código.
+   - Tras tener todo implementado se ha utilizado SonnarLint para verificar la calidad del código.
 
 
 ## Cosas que se podrían mejorar o implementar:

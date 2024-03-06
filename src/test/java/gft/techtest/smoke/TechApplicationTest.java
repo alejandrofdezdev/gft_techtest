@@ -1,16 +1,24 @@
 package gft.techtest.smoke;
 
+import gft.techtest.TechApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import gft.techtest.TechApplication;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TechApplication.class)
-public class TechApplicationTest {
+class TechApplicationTest {
+
+    @Autowired
+    private ApplicationContext context;
 
     @Test
-    public void contextLoads() {
+    void contextLoads() {
+        assertNotNull(context);
     }
 }

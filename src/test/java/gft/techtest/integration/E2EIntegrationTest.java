@@ -12,13 +12,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class E2EIntegrationTest {
+class E2EIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -27,7 +26,7 @@ public class E2EIntegrationTest {
     @MethodSource("getTestParams")
     @Sql(value = {"/create_prices_test_table.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/delete_prices_test_table.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void testFindAllEndpointInvokesControllerMethod(ExpectedParam testParams) throws Exception {
+    void testFindAllEndpointInvokesControllerMethod(ExpectedParam testParams) throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/prices")
                 .param("applicationDate", testParams.getApplicationDate().toString())
