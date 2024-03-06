@@ -19,7 +19,7 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public Price findApplicablePrice(Long brandId, Long productId, LocalDateTime applicationDate) {
-        PriceEntity entity = repository.findApplicablePrice(brandId, productId, applicationDate)
+        PriceEntity entity = repository.findApplicablePrices(brandId, productId, applicationDate)
                 .stream().findFirst().orElseThrow(NotFoundException::new);
 
         return mapper.toDomain(entity);
