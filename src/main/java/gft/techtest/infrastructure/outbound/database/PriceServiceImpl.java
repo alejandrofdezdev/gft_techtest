@@ -18,9 +18,9 @@ public class PriceServiceImpl implements PriceService {
     private final PriceMapper mapper;
 
     @Override
-    public Price findApplicablePrice(Long brandId, Long productId, LocalDateTime applicationDate) {
-        PriceEntity entity = repository.findApplicablePrices(brandId, productId, applicationDate)
-                .stream().findFirst().orElseThrow(NotFoundException::new);
+    public Price findApplicablePrice(Long brandId, Long productId, LocalDateTime applicationDate) throws NotFoundException {
+        PriceEntity entity = repository.findApplicablePrice(brandId, productId, applicationDate)
+                .orElseThrow(NotFoundException::new);
 
         return mapper.toDomain(entity);
     }

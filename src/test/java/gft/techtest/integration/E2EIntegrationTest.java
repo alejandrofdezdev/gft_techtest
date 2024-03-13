@@ -1,5 +1,6 @@
 package gft.techtest.integration;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -40,6 +41,7 @@ class E2EIntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.endDate").value(testParams.getExpectedEndDate()));
 
     }
+
     public Stream<ExpectedParam> getTestParams() {
         return Stream.of(firstTestParam(), secondTestParam(), thirdTestParam(), fourthTestParam(), fifthTestParam());
     }
@@ -98,6 +100,17 @@ class E2EIntegrationTest {
         testParam.setExpectations(38.95, testStartDate, testEndDate);
 
         return testParam;
+    }
+
+    @Test
+    void testFindAllEndpointInvokesControllerMethodError() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/prices")
+                .param("applicationDate", LocalDateTime.of(2021, 1, 1, 0, 0).toString())
+                .param("productId", "35455")
+                .param("brandId", "1")
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+
     }
     
 }

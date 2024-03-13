@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
@@ -39,7 +39,7 @@ class PriceServiceImplTest {
         PriceEntity toMap = new PriceEntity();
         Price toReturn = new Price();
 
-        doReturn(List.of(toMap)).when(repository).findApplicablePrices(brandId, productId, applicationDate);
+        doReturn(Optional.of(toMap)).when(repository).findApplicablePrice(brandId, productId, applicationDate);
         doReturn(toReturn).when(mapper).toDomain(toMap);
 
         // When
@@ -49,7 +49,7 @@ class PriceServiceImplTest {
         assertNotNull(price);
         assertEquals(toReturn, price);
 
-        verify(repository).findApplicablePrices(brandId, productId, applicationDate);
+        verify(repository).findApplicablePrice(brandId, productId, applicationDate);
         verify(mapper).toDomain(toMap);
     }
 
@@ -60,11 +60,11 @@ class PriceServiceImplTest {
         Long productId = 35455L;
         LocalDateTime applicationDate = LocalDateTime.of(2020, 6, 14, 10, 0);
 
-        doReturn(List.of()).when(repository).findApplicablePrices(brandId, productId, applicationDate);
+        doReturn(Optional.empty()).when(repository).findApplicablePrice(brandId, productId, applicationDate);
 
         assertThrows(NotFoundException.class, () -> sut.findApplicablePrice(brandId, productId, applicationDate));
 
-        verify(repository).findApplicablePrices(brandId, productId, applicationDate);
+        verify(repository).findApplicablePrice(brandId, productId, applicationDate);
     }
 
 }
